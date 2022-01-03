@@ -1,23 +1,27 @@
 from speakerRecognition import task_enroll
 from speakerRecognition import task_predict
+from speakerRecognition import task_predict_single
+from recorder import record
 import PySimpleGUI as sg
 
 if __name__ == "__main__":
 
     mdl = "model2.out"
-    task_enroll("./Jackson ./Nicolas ./Jan ./Arjuan", mdl)
-    #task_predict("./*.wav", mdl)
+    task_enroll("./Jackson ./Nicolas ./Jan ./Arjuan ./Patryk", mdl)
 
-    layout = [[sg.Text("Hello from PySimpleGUI")], [sg.Button("OK")]]
-    # Create the window
-    window = sg.Window("Demo", layout)
+    layout = [[sg.Text("Naciśnij przycisk aby rozpocząć weryfikację mówcy")], [sg.Button("Rozpocznij weryfikacje")]]
+    window = sg.Window("Super Rozpoznawacz", layout, margins=(200, 200))
 
-    # Create an event loop
     while True:
         event, values = window.read()
-        # End program if user closes window or
-        # presses the OK button
-        if event == "OK" or event == sg.WIN_CLOSED:
+        if event == "Rozpocznij weryfikacje":
+            recording = record()
+            label, score = task_predict_single(recording, mdl)
+            sg.popup(label + " " + str(score))
+
+            print(label + " " + str(score))
+
+        if event == sg.WIN_CLOSED:
             break
 
     window.close()

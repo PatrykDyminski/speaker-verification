@@ -4,40 +4,8 @@ import os
 import sys
 import itertools
 import glob
-import argparse
-import PySimpleGUI as sg
 from utils import read_wav
 from interface import ModelInterface
-
-
-def get_args():
-    desc = "Speaker Recognition Command Line Tool"
-    epilog = """
-Wav files in each input directory will be labeled as the basename of the directory.
-Note that wildcard inputs should be *quoted*, and they will be sent to glob.glob module.
-Examples:
-    Train (enroll a list of person named person*, and mary, with wav files under corresponding directories):
-    ./speakerRecognition.py -t enroll -i "/tmp/person* ./mary" -m model.out
-    Predict (predict the speaker of all wav files):
-    ./speakerRecognition.py -t predict -i "./*.wav" -m model.out
-"""
-    parser = argparse.ArgumentParser(description=desc, epilog=epilog,
-                                     formatter_class=argparse.RawDescriptionHelpFormatter)
-
-    parser.add_argument('-t', '--task',
-                        help='Task to do. Either "enroll" or "predict"',
-                        required=True)
-
-    parser.add_argument('-i', '--input',
-                        help='Input Files(to predict) or Directories(to enroll)',
-                        required=True)
-
-    parser.add_argument('-m', '--model',
-                        help='Model file to save(in enroll) or use(in predict)',
-                        required=True)
-
-    ret = parser.parse_args()
-    return ret
 
 
 def task_enroll(input_dirs, output_model):
@@ -80,14 +48,10 @@ def task_predict(input_files, input_model):
         print(f, '->', label, ", score->", score)
 
 
-# if __name__ == "__main__":
-#     # global args
-#     # args = get_args()
-#     # task = args.task
-#     # if task == 'enroll':
-#     #    task_enroll(args.input, args.model)
-#     # elif task == 'predict':
-#     #   task_predict(args.input, args.model)
-#     mdl = "model2.out"
-#     task_enroll("./Jackson ./Nicolas ./Jan ./Arjuan", mdl)
-#     task_predict("./*.wav", mdl)
+def task_predict_single(input_file, input_model):
+    m = ModelInterface.load(input_model)
+    print('Start prediction')
+
+    fs, signal = read_wav(input_file)
+    label, score = m.predict(fs, signal)
+    return label, score
