@@ -36,9 +36,3 @@ class GMMSet:
         p = max(result, key=operator.itemgetter(1))
         softmax_score = self.softmax(scores)
         return p[0], softmax_score
-
-    def before_pickle(self):
-        pass
-
-    def after_pickle(self):
-        pass

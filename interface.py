@@ -27,10 +27,8 @@ class ModelInterface:
 
     def dump(self, fname):
         """ dump all models to file"""
-        self.gmmset.before_pickle()
         with open(fname, 'wb') as f:
             pickle.dump(self, f, -1)
-        self.gmmset.after_pickle()
 
     def predict(self, fs, signal):
         """
@@ -46,6 +44,4 @@ class ModelInterface:
     def load(fname):
         """ load from a dumped model file"""
         with open(fname, 'rb') as f:
-            R = pickle.load(f)
-            R.gmmset.after_pickle()
-            return R
+            return pickle.load(f)

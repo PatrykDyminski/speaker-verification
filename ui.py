@@ -1,5 +1,4 @@
 from speakerRecognition import task_enroll
-from speakerRecognition import task_predict
 from speakerRecognition import task_predict_single
 from recorder import record
 import PySimpleGUI as sg
