@@ -2,7 +2,6 @@ import pickle
 from collections import defaultdict
 from skgmm import GMMSet
 from features import get_feature
-import time
 
 
 class ModelInterface:
@@ -17,13 +16,11 @@ class ModelInterface:
 
     def train(self):
         self.gmmset = GMMSet()
-        start_time = time.time()
         for name, feats in self.features.items():
             try:
                 self.gmmset.fit_new(feats, name)
             except Exception as e:
                 print("%s failed" % (name))
-        print(time.time() - start_time, " seconds")
 
     def dump(self, fname):
         """ dump all models to file"""
@@ -35,10 +32,10 @@ class ModelInterface:
         return a label (name)
         """
         try:
-            feat = get_feature(fs, signal)
+            feature = get_feature(fs, signal)
         except Exception as e:
             print(e)
-        return self.gmmset.predict_one(feat)
+        return self.gmmset.predict_one(feature)
 
     @staticmethod
     def load(fname):

@@ -50,8 +50,6 @@ def task_predict(input_files, input_model):
 
 def task_predict_single(input_file, input_model):
     m = ModelInterface.load(input_model)
-    print('Start prediction')
-
     fs, signal = read_wav(input_file)
     label, score = m.predict(fs, signal)
     return label, score

@@ -1,6 +1,7 @@
 from speakerRecognition import task_enroll
 from speakerRecognition import task_predict_single
 from recorder import record
+from recorder import play
 import PySimpleGUI as sg
 
 if __name__ == "__main__":
@@ -18,6 +19,7 @@ if __name__ == "__main__":
             label, score = task_predict_single(recording, mdl)
             sg.popup(label + " " + str(score))
 
+            play(recording)
             print(label + " " + str(score))
 
         if event == sg.WIN_CLOSED:
