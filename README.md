@@ -10,7 +10,7 @@ This project is a simple python3 version of [speaker-recognition](https://github
 
 ### Usage
 ```sh
-usage: speaker-recognition.py [-h] -t TASK -i INPUT -m MODEL
+usage: speakerRecognition.py [-h] -t TASK -i INPUT -m MODEL
 
 Speaker Recognition Command Line Tool
 
@@ -27,8 +27,8 @@ Note that wildcard inputs should be *quoted*, and they will be sent to glob modu
 
 Examples:
     Train:
-    ./speaker-recognition.py -t enroll -i "/tmp/person* ./mary" -m model.out
+    ./speakerRecognition.py -t enroll -i "/tmp/person* ./mary" -m model.out
 
     Predict:
-    ./speaker-recognition.py -t predict -i "./*.wav" -m model.out
+    ./speakerRecognition.py -t predict -i "./*.wav" -m model.out
 ```

@@ -4,6 +4,7 @@ from skgmm import GMMSet
 from features import get_feature
 import time
 
+
 class ModelInterface:
 
     def __init__(self):
@@ -20,9 +21,9 @@ class ModelInterface:
         for name, feats in self.features.items():
             try:
                 self.gmmset.fit_new(feats, name)
-            except Exception as e :
-                print ("%s failed"%(name))
-        print (time.time() - start_time, " seconds")
+            except Exception as e:
+                print("%s failed" % (name))
+        print(time.time() - start_time, " seconds")
 
     def dump(self, fname):
         """ dump all models to file"""
@@ -38,7 +39,7 @@ class ModelInterface:
         try:
             feat = get_feature(fs, signal)
         except Exception as e:
-            print (e)
+            print(e)
         return self.gmmset.predict_one(feat)
 
     @staticmethod
