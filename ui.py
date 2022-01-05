@@ -1,4 +1,5 @@
 from speakerRecognition import task_enroll
+from speakerRecognition import task_enroll2
 from speakerRecognition import task_predict_single
 from recorder import record
 from recorder import play
@@ -6,8 +7,10 @@ import PySimpleGUI as sg
 
 if __name__ == "__main__":
 
-    mdl = "model2.out"
-    task_enroll("./Jackson ./Nicolas ./Jan ./Arjuan ./Patryk", mdl)
+    mdl = "mdl3.out"
+    #task_enroll("./Jackson ./Nicolas ./Jan ./Arjuan ./Patryk", mdl)
+
+    #task_enroll2()
 
     layout = [[sg.Text("Naciśnij przycisk aby rozpocząć weryfikację mówcy")], [sg.Button("Rozpocznij weryfikacje")]]
     window = sg.Window("Super Rozpoznawacz", layout, margins=(200, 200))

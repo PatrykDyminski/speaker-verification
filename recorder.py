@@ -5,7 +5,7 @@ from utils import read_wav
 
 def record():
     fs = 44100
-    duration = 1  # seconds
+    duration = 3  # seconds
 
     recording = sd.rec(duration * fs, samplerate=fs, channels=1, dtype='float64')
     sd.wait()

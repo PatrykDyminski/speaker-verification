@@ -4,6 +4,10 @@ import os
 import sys
 import itertools
 import glob
+from os.path import splitext
+
+from pydub import AudioSegment
+
 from utils import read_wav
 from interface import ModelInterface
 
@@ -35,6 +39,58 @@ def task_enroll(input_dirs, output_model):
 
     m.train()
     m.dump(output_model)
+
+
+def task_enroll2():
+
+    m = ModelInterface()
+
+    mainDir = "dev-clean"
+
+    for speakerDir in os.listdir(mainDir):
+        d = os.path.join(mainDir, speakerDir)
+        if os.path.isdir(d):
+            for chapterDir in os.listdir(d):
+                ch = os.path.join(d, chapterDir)
+                if os.path.isdir(ch):
+                    for flacFile in os.listdir(ch):
+                        file = os.path.join(ch, flacFile)
+                        if os.path.isfile(file):
+                            if file.endswith(".wav"):
+                                try:
+                                    fs, signal = read_wav(file)
+                                    m.enroll(speakerDir, fs, signal)
+                                    print("enrolled: " + speakerDir + ": " + file)
+                                except Exception as e:
+                                    print(file + " error %s" % e)
+
+    m.train()
+    m.dump("mdl3.out")
+
+
+def convert_files_to_wav():
+    mainDir = "dev-clean"
+
+    for speakerDir in os.listdir(mainDir):
+        d = os.path.join(mainDir, speakerDir)
+        if os.path.isdir(d):
+            print(d)
+            for chapterDir in os.listdir(d):
+                ch = os.path.join(d, chapterDir)
+                if os.path.isdir(ch):
+                    print("-" + ch)
+                    for flacFile in os.listdir(ch):
+                        file = os.path.join(ch, flacFile)
+                        if os.path.isfile(file):
+                            if file.endswith(".flac"):
+                                print("--" + file)
+                                flac2wav(file)
+
+
+def flac2wav(flac):
+    wav_path = "%s.wav" % splitext(flac)[0]
+    song = AudioSegment.from_file(flac, format="flac")
+    song.export(wav_path, format="wav")
 
 
 def task_predict(input_files, input_model):

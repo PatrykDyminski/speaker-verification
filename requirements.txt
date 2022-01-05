@@ -6,3 +6,4 @@ sklearn==0.0
 PySimpleGUI~=4.55.1
 sounddevice~=0.4.4
 SoundFile~=0.10.3.post1
+pydub~=0.25.1
