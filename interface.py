@@ -19,18 +19,16 @@ class ModelInterface:
         for name, feats in self.features.items():
             try:
                 self.gmmset.fit_new(feats, name)
+                print("Fitted next feature for: " + name)
             except Exception as e:
-                print("%s failed" % (name))
+                print("%s failed" % name)
 
     def dump(self, fname):
-        """ dump all models to file"""
+        print("Dumping to file")
         with open(fname, 'wb') as f:
             pickle.dump(self, f, -1)
 
     def predict(self, fs, signal):
-        """
-        return a label (name)
-        """
         try:
             feature = get_feature(fs, signal)
         except Exception as e:
@@ -39,6 +37,5 @@ class ModelInterface:
 
     @staticmethod
     def load(fname):
-        """ load from a dumped model file"""
         with open(fname, 'rb') as f:
             return pickle.load(f)

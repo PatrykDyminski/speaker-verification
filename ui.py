@@ -8,9 +8,8 @@ import PySimpleGUI as sg
 if __name__ == "__main__":
 
     mdl = "mdl3.out"
-    #task_enroll("./Jackson ./Nicolas ./Jan ./Arjuan ./Patryk", mdl)
 
-    #task_enroll2()
+    task_enroll2()
 
     layout = [[sg.Text("Naciśnij przycisk aby rozpocząć weryfikację mówcy")], [sg.Button("Rozpocznij weryfikacje")]]
     window = sg.Window("Super Rozpoznawacz", layout, margins=(200, 200))
@@ -22,7 +21,7 @@ if __name__ == "__main__":
             label, score = task_predict_single(recording, mdl)
             sg.popup(label + " " + str(score))
 
-            play(recording)
+            #play(recording)
             print(label + " " + str(score))
 
         if event == sg.WIN_CLOSED:

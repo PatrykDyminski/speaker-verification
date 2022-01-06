@@ -19,11 +19,8 @@ class GMMSet:
 
     def predict_one(self, x):
         scores = [self.gmm_score(gmm, x) for gmm in self.gmms]
-        print(scores)
-        # p = sorted(enumerate(scores), key=operator.itemgetter(1), reverse=True)
-        # p = [(str(self.y[i]), y, p[0][1] - y) for i, y in p]
         result = [(self.labels[index], value) for (index, value) in enumerate(scores)]
-        #[print(self.y[index], value) for (index, value) in enumerate(scores)]
+        print(result)
         p = max(result, key=operator.itemgetter(1))
         softmax_score = self.softmax(scores)
         return p[0], softmax_score
