@@ -28,12 +28,12 @@ class ModelInterface:
         with open(fname, 'wb') as f:
             pickle.dump(self, f, -1)
 
-    def predict(self, fs, signal):
+    def verify(self, fs, signal, label):
         try:
             feature = get_feature(fs, signal)
         except Exception as e:
             print(e)
-        return self.gmmset.predict_one(feature)
+        return self.gmmset.verify_one(feature, label)
 
     @staticmethod
     def load(fname):

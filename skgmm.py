@@ -16,7 +16,7 @@ class GMMSet:
         gmm.fit(x)
         self.gmms.append(gmm)
 
-    def predict_one(self, x):
+    def verify_one(self, x, label):
         scores = [self.gmm_score(gmm, x) for gmm in self.gmms]
         results = [(self.labels[index], value) for (index, value) in enumerate(scores)]
         print(max(results, key=operator.itemgetter(1)))

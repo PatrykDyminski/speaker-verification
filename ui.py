@@ -1,15 +1,13 @@
-from speakerRecognition import task_enroll
-from speakerRecognition import task_enroll2
-from speakerRecognition import task_predict_single
+from speakerRecognition import process_files
+from speakerRecognition import verify_sample
 from recorder import record
-from recorder import play
 import PySimpleGUI as sg
 
 if __name__ == "__main__":
 
     mdl = "mdl3.out"
 
-    #task_enroll2()
+    #process_files()
 
     layout = [[sg.Text("Naciśnij przycisk aby rozpocząć weryfikację mówcy")], [sg.Button("Rozpocznij weryfikacje")]]
     window = sg.Window("Super Rozpoznawacz", layout, margins=(200, 200))
@@ -18,7 +16,7 @@ if __name__ == "__main__":
         event, values = window.read()
         if event == "Rozpocznij weryfikacje":
             recording = record()
-            label, score = task_predict_single(recording, mdl)
+            label, score = verify_sample(recording, mdl, "Patryk")
             sg.popup(label + " " + str(score))
 
             #play(recording)
