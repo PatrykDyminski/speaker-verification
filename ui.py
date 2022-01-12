@@ -16,7 +16,10 @@ if __name__ == "__main__":
         event, values = window.read()
         if event == "Rozpocznij weryfikacje":
             recording = record()
-            label, score = verify_sample(recording, mdl, "Patryk")
+
+            label = "Patryk"
+
+            score = verify_sample(recording, mdl, label)
             sg.popup(label + " " + str(score))
 
             #play(recording)

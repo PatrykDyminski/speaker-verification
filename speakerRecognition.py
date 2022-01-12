@@ -35,8 +35,7 @@ def convert_files_to_wav():
 def verify_sample(input_file, input_model, labelToVerify):
     m = ModelInterface.load(input_model)
     fs, signal = read_wav(input_file)
-    label, score = m.verify(fs, signal, labelToVerify)
-    return label, score
+    return m.verify(fs, signal, labelToVerify)
 
 
 def traverse_file_tree_and_do_action(action):

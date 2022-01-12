@@ -18,8 +18,8 @@ class ModelInterface:
         self.gmmset = GMMSet()
         for name, feats in self.features.items():
             try:
-                self.gmmset.fit_new(feats, name)
-                print("Fitted next feature for: " + name)
+                self.gmmset.new_model(feats, name)
+                print("Fitted: " + name)
             except Exception as e:
                 print("%s failed" % name)
 
