@@ -11,9 +11,9 @@ def get_feature(fs, signal):
         winlen=0.032,
         winstep=0.016,
         preemph=0.95,
-        nfft=2048,
+        nfft=1024,
         winfunc=np.hamming,
-        nfilt=50)
+        nfilt=30)
     mfcc_feature = preprocessing.scale(mfcc_feature)
     if len(mfcc_feature) == 0:
         print >> sys.stderr, "ERROR.. failed to extract mfcc feature:", len(signal)

@@ -9,7 +9,7 @@ if __name__ == "__main__":
 
     mdl = "mdl3.out"
 
-    task_enroll2()
+    #task_enroll2()
 
     layout = [[sg.Text("Naciśnij przycisk aby rozpocząć weryfikację mówcy")], [sg.Button("Rozpocznij weryfikacje")]]
     window = sg.Window("Super Rozpoznawacz", layout, margins=(200, 200))

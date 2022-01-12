@@ -1,6 +1,5 @@
 from sklearn.mixture import GaussianMixture
 import operator
-import numpy as np
 import math
 
 
@@ -19,16 +18,16 @@ class GMMSet:
 
     def predict_one(self, x):
         scores = [self.gmm_score(gmm, x) for gmm in self.gmms]
-        result = [(self.labels[index], value) for (index, value) in enumerate(scores)]
-        print(result)
-        p = max(result, key=operator.itemgetter(1))
+        results = [(self.labels[index], value) for (index, value) in enumerate(scores)]
+        print(max(results, key=operator.itemgetter(1)))
+        p = max(results, key=operator.itemgetter(1))
         softmax_score = self.softmax(scores)
         return p[0], softmax_score
 
     @staticmethod
     def gmm_score(gmm, x):
-        e = gmm.score(x)
-        return np.sum(e) / len(x)
+        score = gmm.score(x)
+        return score / len(x)
 
     @staticmethod
     def softmax(scores):
