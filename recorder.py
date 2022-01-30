@@ -3,9 +3,8 @@ import soundfile as sf
 from utils import read_wav
 
 
-def record():
+def record(duration):
     fs = 44100
-    duration = 5  # seconds
 
     recording = sd.rec(duration * fs, samplerate=fs, channels=1, dtype='float64')
     sd.wait()
