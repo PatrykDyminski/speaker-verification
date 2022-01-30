@@ -27,10 +27,8 @@ def process_files():
     m.dump("mdl3.out")
 
 
-def test_model(input_model, label, seconds):
+def test_model(input_model, label, seconds, directory):
     m = ModelInterface.load(input_model)
-
-    mainDir = "dev-clean"
 
     results = []
 
@@ -49,9 +47,9 @@ def test_model(input_model, label, seconds):
 
             if abs(score) < 0.062:
                 print("Patryk")
-                sf.write("rec" + str(score) + ".wav", signal[:frames], fs)
+                sf.write("rec" + dir + ".wav", signal[:frames], fs)
 
-    traverse_file_tree_and_do_action(mainDir, test)
+    traverse_file_tree_and_do_action(directory, test)
 
     print(results)
     print(np.shape(results))
